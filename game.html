@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;1,200;1,300&family=Press+Start+2P&display=swap');
+        
+        *{
+            font-family: 'press start 2p',sans-serif;
+        }
+        body{
+            color: white;
+            background-color: black;
+        }
+        header div{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header div .pra1{
+            font-size: 30px;
+            margin: 20px;
+            padding: 10px;
+        }
+        header div h5{
+            font-size: 30px;
+        }
+        h1{
+            text-align: center;
+            font-size: 40px;
+        }
+        header{
+            border-bottom: 20px solid white;
+        }
+        .number{
+            font-size: 80px;
+            width: 100px;
+            background-color: red;
+            padding: 20px;
+            position: relative;
+            left: 41%;
+            top: 65px;
+            justify-content: center;
+        }
+        section{
+            margin-top: 150px;
+            display: flex;
+            justify-content: space-around;
+        } 
+       .guess{
+        padding: 20px;
+        width: 200px;
+        font-size: 40px;
+        text-align: center;
+        border: 2px solid white;
+        display: block;
+       }
+       .btn{
+        font-size: 30px;
+        padding: 10px;
+        margin-top: 20px;
+        margin-left: 20px;
+       }
+       .message{
+        font-size: 30px;
+        margin-bottom: 50px;
+       }
+       .label{
+        font-size: 30px;
+        margin-bottom: 50px;
+       }
+       .label2{
+        font-size: 30px;
+        
+       }
+      </style>
+</head>
+<body>
+    <header>
+        <div>
+            <button class="pra1">Again!</button>
+            <h5>(Between 1 and 20)</h5>
+        </div>
+        <h1>Guess my number!</h1>
+        <div class="number">?</div>
+    </header>
+
+    <section>
+        <div class="left">
+            <input type="number" name="guees" class="guess" id="guees">
+            <button class="btn" id="shiva">Check?</button>
+        </div>
+        <div class="right">
+            <h4 class="message">Start Gueesing.....</h4>
+            <h4 class="label">Score: <span id="score">20</span></h4>
+            <h4 class="label2">highscore: <span id="highscore">0</span></h4>
+        </div>
+    </section>
+
+</body>
+
+<script>
+
+    // to generate a secrect number:
+
+    let secrenumber=Math.trunc(Math.random()*20+1);
+
+    let score=20;
+    let highscore=0;
+
+
+    // logic:
+
+    document. getElementById("shiva").addEventListener("click",()=>{
+        const guessedno =Number(document.getElementById('guees').value);
+    
+
+
+    // if there is no number:
+
+    if(!guessedno){
+        document.querySelector(".message").textContent="no number!"
+    }
+
+    // when player wins:
+    else if(guessedno===secrenumber){
+        document.querySelector(".message").textContent="correct number!";
+        document.querySelector(".number").textContent="secrenumber";
+        document.querySelector('body').style.backgroundColor="orange";
+    }   
+    
+    // for high score:
+
+    if(score>highscore){
+        highscore=score;
+        document.getElementById('highscore').textContent=highscore;
+    }
+
+    // when the game is high;
+    else if(guessedno > secrenumber){
+        if(score > 1){
+            document.querySelector(".message").textContent="To high";
+            score = score -1;
+            document.getElementById('score').textContent =score;
+        }else{
+            document.querySelector('.message').textContent="you loss the game!";
+            document.getElementById('score').textContent=0;
+
+        }
+    }
+
+    // when the game is low;
+
+    else if(guessedno < secrenumber){
+        if(score > 1){
+            document.querySelector(".message").textContent="To low";
+            score = score=1;
+            document.getElementById('score').textContent=score;
+        }else{
+            document.querySelector('.message').textContent="you loss the game!";
+            document.getElementById('score').textContent=0;
+
+        }
+    }
+})
+</script>
+</html>
